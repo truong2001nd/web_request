@@ -1,0 +1,55 @@
+POST  http://localhost:5000/api/auth/reg
+Content-Type: application/json
+
+{
+    "username": "truong2k1",
+    "password": "truong2001"
+
+}
+
+###
+
+POST  http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "truong2001",
+    "password": "truong2001"
+
+}
+
+
+###
+POST  http://localhost:5000/api/permission
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjUxODI0ODc3YjdlYTEzZjhlZjM0MzZiIiwiaWF0IjoxNjk2MDgxMDM2fQ.fDk1eJv2Ucqyi2qtUIeGNblSIzHf2aD4H4o7oWo0DYI
+
+{
+    "title":"Quan ly dơn"
+}
+
+###
+GET   http://localhost:5000/api/permission
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjUxODI0ODc3YjdlYTEzZjhlZjM0MzZiIiwiaWF0IjoxNjk2MDgxMDM2fQ.fDk1eJv2Ucqyi2qtUIeGNblSIzHf2aD4H4o7oWo0DYI
+
+###
+
+PUT    http://localhost:5000/api/permission/update/65181f110795b5a3b3dbceca
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjUxODFlZTMwNzk1YjVhM2IzZGJjZWM3IiwiaWF0IjoxNjk2MDgyNjU0fQ.5gL5NuZ4KH3TlZb0CpG_o19JhnxUKYEkDZ9NoKeiYU8
+
+{   
+    "title": "Quan ly nhân viên",
+    "description":"tao tai khoan cho nhan vien"
+}
+
+###
+POST  http://localhost:5000/api/account
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2NTFhYzU5NTRkNzcyMzhiN2M1YWNjYTYiLCJpYXQiOjE2OTYyNTMzMzN9.pEEco3TpBL5sB9PjnVY0DB0oIYeNFOAKz9Cd_rTgy3I{
+  
+{ 
+    "username": "t",
+    "password": "truong2001",
+    "permission":"651a7948034a265fb1725da3"
+}
