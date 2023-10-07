@@ -2,6 +2,54 @@ POST http://localhost:5000/api/users/single
 Content-Type: application/json
 
 {
-  
+  "name":"truong",
+  "content":[{
+            "key":"proposedName",
+            "label":"Tên đề xuất",
+            "required": true
+        },
+        {
+            "key":"proposalGroup",
+            "label":"Nhóm đề xuất",
+            "required": true
+        },
+        {
+            "key":"fullName",
+            "label":"Họ Và tên",
+            "required": true
+        },
+        {
+            "key":"room",
+            "label":"bộ phận",
+            "required": true
+        },
+        {
+            "key":"startDay",
+            "label":"Ngày bắt đầu làm việc",
+            "required": true
+        },
+        {
+            "key":"position",
+            "label":"chức vụ",
+            "required": true
+        },
+        {
+            "key":"TheLastWorkingDay",
+            "label":"Ngày làm việc cuối cùng",
+            "required": true
+        },
+        {
+            "key":"reasonForQuittingJob",
+            "label":"Lí do nghỉ việc",
+            "required": true
+        },
+        {
+            "key":"approver",
+            "label":"Người phê duyệt",
+            "required": true
+        }],
+    "singlesStyes":"65201f80c8dbc9e75ea177ac",
+    "sender":"651d0ce00c3c16a4fcd21826",
+    "approver":"651cfe3f9850513c80b93dfa"
     
 }
