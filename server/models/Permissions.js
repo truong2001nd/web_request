@@ -9,7 +9,7 @@ const PermissionSchema = new mongoose.Schema(
     },
     status: { type: Number, enum: [0, 1] },
     permission: { type: [String] },
-    positission: { type: [String] },
+    position: { type: [String] },
     room: { type: [String] },
     single: { type: [String] },
     singleType: { type: [String] },

@@ -12,17 +12,19 @@ const Singles = new Schema(
       type: String,
     },
     status: { type: Number, enum: [0, 1, 2] },
-    singlesStypes: {
+    singlesStyes: {
       type: Schema.Types.ObjectId,
       ref: "SinglesStypes",
     },
     sender: {
       type: Schema.Types.ObjectId,
       ref: "Users",
+      required: true,
     },
     approver: {
       type: Schema.Types.ObjectId,
       ref: "Users",
+      required: true,
     },
   },
   { timestamps: true }
