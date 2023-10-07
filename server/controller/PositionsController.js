@@ -14,17 +14,21 @@ const createPositions = async (req, res) => {
       message: "Vui lòng cung cấp tên chức vụ !",
     });
   }
+  if (!room) {
+    return res.status(404).json({
+      success: false,
+      message: "vui lòng chọn chức vụ",
+    });
+  }
   try {
-    let roomObject;
-    if (room) {
-      roomObject = await Room.findById(room);
-      if (!roomObject) {
-        return res.status(404).json({
-          success: false,
-          message: "Không tìm thấy phòng ban với mã đã cho!",
-        });
-      }
+    let roomObject = await Room.findById(room);
+    if (!roomObject) {
+      return res.status(404).json({
+        success: false,
+        message: "Không tìm thấy phòng ban với mã đã cho!",
+      });
     }
+
     const existingPosition = await Position.findOne({
       name,
       room: roomObject._id,
@@ -33,13 +37,14 @@ const createPositions = async (req, res) => {
       return res.status(409).json({
         success: false,
         message: "Chức vụ đã tồn tại trong phòng ban này!",
-        existingPosition: existingPosition,
       });
     }
 
+    console.log("existingPosition", existingPosition);
+
     const newPosition = new Position({
       name,
-      room: room || "",
+      room: room,
     });
 
     await newPosition.save();

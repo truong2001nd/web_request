@@ -87,5 +87,94 @@ const getAllSingle = async (req, res) => {
     res.status(500).json({ success: false, message: "Dịch vụ bị gián đoạn" });
   }
 };
+const destroySingle = async (req, res) => {
+  // check quyen
 
-module.exports = { createSingle, getAllSingle };
+  if (!req.permissions.single.includes("delete")) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Tài khoản không có quyền truy cập" });
+  }
+
+  // check quyen
+
+  try {
+    const deleteSing = await Singles.findOneAndDelete({
+      _id: req.params.id,
+    });
+    if (!deleteSing) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Loại đơn này không tồn tại" });
+    }
+    res.json({
+      success: true,
+      message: "Đã xóa thành công",
+      permission: deleteSing,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Dịch vụ bị gián đoạn" });
+  }
+};
+const updateSingle = async (req, res) => {
+  // check quyen
+
+  if (!req.permissions.single.includes("update")) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Tài khoản không có quyền truy cập" });
+  }
+
+  // check quyen
+
+  const { name, content } = req.body;
+  if (!name) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Vui lòng nhập tên loại đơn" });
+  }
+  try {
+    const singleId = await Singles.findOne({ _id: req.params.id });
+    if (!singleId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Mã loại đơn này sai" });
+    }
+    if (!(singleId.status === 0)) {
+      return res.status(400).json({
+        success: false,
+        message: "Đơn đã được phê duyệt không được sửa",
+      });
+    }
+    const existingSingleType = await SingleType.findOne({
+      name,
+      _id: { $ne: req.params.id },
+    });
+    if (existingSingleType) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Tên loại đơn đã tồn tại" });
+    }
+    let updateSingle = {
+      name,
+      content: JSON.stringify(content),
+    };
+
+    const newSingleId = await Singles.findOneAndUpdate(
+      { _id: req.params.id },
+      updateSingle,
+      { new: true }
+    );
+    res.json({
+      success: true,
+      message: "Cập nhật thành công!",
+      permission: newSingleId,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Dịch vụ bị gián đoạn" });
+  }
+};
+
+module.exports = { createSingle, getAllSingle, destroySingle, updateSingle };

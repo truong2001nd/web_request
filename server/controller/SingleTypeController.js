@@ -1,6 +1,7 @@
 const SingleType = require("../models/SingleTypes.js");
 
 const createSingleType = async (req, res, next) => {
+  
   if (!req.permissions.singleType.includes("create")) {
     return res
       .status(401)
